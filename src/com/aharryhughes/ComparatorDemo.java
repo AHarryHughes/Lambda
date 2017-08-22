@@ -26,23 +26,21 @@ public class ComparatorDemo {
         print(addresses);
 
         // !! - Write an anonymous class to sort by state (alphabetically)
-        Collections.sort(addresses, (a1, a2) -> {
-            if((int) a1.getState().charAt(0) < (int) a2.getState().charAt(0)){
-                return -1;
-            }
-            else if((int) a1.getState().charAt(0) == (int) a2.getState().charAt(0)){
-                if ((int) a1.getState().charAt(1) < (int) a2.getState().charAt(1)){
+        Collections.sort(addresses, new Comparator() {
+            public int compare(Address a1, Address a2) {
+                if ((int) a1.getState().charAt(0) < (int) a2.getState().charAt(0)) {
                     return -1;
-                }
-                else{
+                } else if ((int) a1.getState().charAt(0) == (int) a2.getState().charAt(0)) {
+                    if ((int) a1.getState().charAt(1) < (int) a2.getState().charAt(1)) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                } else {
                     return 1;
                 }
             }
-            else{
-                return 1;
-            }
-                }
-          );
+        });
 
         System.out.println("\nAfter sorting by state");
         print(addresses);
